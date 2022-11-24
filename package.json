@@ -9,5 +9,9 @@
     },
     "keywords": [],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "csvtojson": "^2.0.10",
+        "utf-8-validate": "^5.0.10"
+    }
 }
