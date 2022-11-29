@@ -12,9 +12,10 @@ export default class Cp1251ToUtf8 {
     constructor(input_path,output_path){
         this.input_path=input_path;
         this.output_path=output_path;
+        this.input = fs.readFileSync(this.input_path, 'binary');
+        this.output='';
     }
-    input = fs.readFileSync(this.input_path, 'binary');
-    output='';
+
 
     // нужна проверка на 8-ми битную кодировку
     // восможно стоит поменять на json файл соотвествия кодов в кодировках
@@ -22,7 +23,6 @@ export default class Cp1251ToUtf8 {
         const csv_arrey=this.input.split('');
         let endListSplit='';
         for (let index in this.input){
-            console.log(this.input[index], this.input[index].charCodeAt(0))
             if (this.input[index].charCodeAt(0)<128){
                 endListSplit+=String.fromCharCode(this.input[index].charCodeAt(0));
             }else if ((this.input[index].charCodeAt(0)>=192)&&(this.input[index].charCodeAt(0)<256)){
@@ -230,6 +230,6 @@ export default class Cp1251ToUtf8 {
 
         }
         this.output=fs.writeFileSync(this.output_path,endListSplit,'utf8')
-        return (console.log(endListSplit, 'good write'))
+        return (console.log('good write'))
     };
 }
