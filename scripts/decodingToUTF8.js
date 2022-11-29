@@ -1,24 +1,36 @@
 import fs from 'fs'
 
 //const input_csv = new FileReader('scripts\\test_files\\operations Tue Nov 01 09_25_33 MSK 2022-Wed Nov 16 17_54_29 MSK 2022.csv')
-const input_csv = fs.readFileSync('scripts\\test_files\\222.csv', 'binary')
+//const input_path='scripts\\test_files\\222.csv'
+//const input_csv = fs.readFileSync(input_path, 'binary')
 
 /* function cp1251Toutf8 (input, output){
     readAsArrayBuffer(input)
     return output
 } */
-const csv_arrey=input_csv.split('');
-let endListSplit='';
-for (let index in input_csv){
-    console.log(input_csv[index], input_csv[index].charCodeAt(0))
-    if (input_csv[index].charCodeAt(0)<128){
-        endListSplit+=String.fromCharCode(input_csv[index].charCodeAt(0));
-    }else if ((input_csv[index].charCodeAt(0)>=192)&&(input_csv[index].charCodeAt(0)<256)){
-        endListSplit+=String.fromCharCode(input_csv[index].charCodeAt(0)+848);
-    }else if ((input_csv[index].charCodeAt(0)>=256)){
-        throw 'не 8-ми битная кодировка'
-    }else{
-        switch(input_csv[index].charCodeAt(0)){
+export default class Cp1251ToUtf8 {
+    constructor(input_path,output_path){
+        this.input_path=input_path;
+        this.output_path=output_path;
+    }
+    input = fs.readFileSync(this.input_path, 'binary');
+    output='';
+
+    // нужна проверка на 8-ми битную кодировку
+    // восможно стоит поменять на json файл соотвествия кодов в кодировках
+    decoding(){
+        const csv_arrey=this.input.split('');
+        let endListSplit='';
+        for (let index in this.input){
+            console.log(this.input[index], this.input[index].charCodeAt(0))
+            if (this.input[index].charCodeAt(0)<128){
+                endListSplit+=String.fromCharCode(this.input[index].charCodeAt(0));
+            }else if ((this.input[index].charCodeAt(0)>=192)&&(this.input[index].charCodeAt(0)<256)){
+                endListSplit+=String.fromCharCode(this.input[index].charCodeAt(0)+848);
+            }else if ((this.input[index].charCodeAt(0)>=256)){
+                throw 'не 8-ми битная кодировка'
+            }else{
+                switch(this.input[index].charCodeAt(0)){
             case 128:
                 endListSplit+=String.fromCharCode(1026)
                 break;
@@ -213,9 +225,11 @@ for (let index in input_csv){
                 break;
             default:
                 endListSplit+=String.fromCharCode(63)
+                }
+            }
+
         }
-    }
-
+        this.output=fs.writeFileSync(this.output_path,endListSplit,'utf8')
+        return (console.log(endListSplit, 'good write'))
+    };
 }
-
-console.log(endListSplit)
