@@ -19,8 +19,10 @@ csv({
     })
     .fromFile(input_csv)
     .then((jsonObj) => {
-        json_object.dataList = jsonObj
+        json_object.dataList = jsonObj;
+        fs.writeFileSync(output_json, JSON.stringify(json_object),'utf-8');
+        console.log('OK')
         
     }) 
 
-setTimeout(()=>{fs.writeFileSync(output_json, JSON.stringify(json_object),'utf-8');console.log('OK')},2000)
+//setTimeout(()=>{fs.writeFileSync(output_json, JSON.stringify(json_object),'utf-8');console.log('OK')},2000)
