@@ -230,8 +230,12 @@ export default class Cp1251ToUtf8 {
             }
 
         }
-        this.output=fs.writeFileSync(this.output_path,endListSplit,'utf8')
-        return (console.log('good write'))
+        
+        return (endListSplit)
     };
+    writeJSON(text=decoding()){
+        this.output=fs.writeFileSync(this.output_path,endListSplit,'utf8')//нужно записывать имя исходного файла
+        return (console.log('good write'))
+    }
 }
 
