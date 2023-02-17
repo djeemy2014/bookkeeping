@@ -8,7 +8,7 @@ function  button_in(){
 //
 //function(event) {
 //    if (event.code == 'KeyZ'&& (event.ctrlKey || event.metaKey)){
-function  button_out(i=0){
+function button_out(i=0){
     let slote_list = document.querySelector('.card.modal-card.embedded.has-footer')
     let slote_time = document.querySelector('.timeslots__date-group')
     if (slote_list==null){
@@ -43,6 +43,7 @@ function  button_out(i=0){
     }
     }
 }
+button_out()
 //}}
 //)
 function reader(){
