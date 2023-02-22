@@ -4,7 +4,7 @@ import cp1251 from './decodingToUTF8.js'
 
 let input_csv = 'scripts\\test_files\\123.csv'
 let output_csv = 'scripts\\test_files\\testing_1.csv'
-let output_json = 'scripts\\test_files\\testing_1.json'
+let output_json = 'scripts\\test_files\\testing_1.json' //Переписать чтобы вводить параметры отдельно с формирование уникального имени
     /* const buf = isValidUTF8(input_csv)
     console.log(buf) */
     //console.log(csv())
@@ -20,7 +20,7 @@ csv({
     .fromFile(input_csv)
     .then((jsonObj) => {
         json_object.dataList = jsonObj;
-        fs.writeFileSync(output_json, JSON.stringify(json_object),'utf-8');
+        fs.writeFileSync(output_json, JSON.stringify(json_object),'utf-8');//записывать имя исходника
         console.log('OK')
         
     }) 
