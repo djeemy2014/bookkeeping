@@ -17,6 +17,7 @@
         "fs": "^0.0.1-security",
         "node-fetch": "^3.3.0",
         "utf-8-validate": "^5.0.10",
+        "xlsx": "^0.18.5",
         "xmlhttprequest": "^1.8.0"
     }
 }

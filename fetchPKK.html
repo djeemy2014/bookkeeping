@@ -28,7 +28,7 @@
     <h1>Программа для получения данных о зонах</h1>
     <!-- <p>Перед началом необходимо открыть режим разрабодчика и найти консоль браузера (не нужно =))</p> -->
     <!-- <div class="dropFile">Поместить файл .csv сюда</div> -->
-    <input type="file" id="inputFile">Поместить файл .csv сюда</input></br></br>
+    <input type="file" id="inputFile">Поместить файл .txt сюда</input></br></br>
     <button id="button1">ПУСК!!!</button></br></br>
     <!-- <button id="button2" onclick="fuction2()">Нажать что бы вывести результат в консоль и таблицу</button></br></br> -->
     <button id="button3">Дай файлы среза</button></br></br>
@@ -203,7 +203,7 @@ function fuction2(){
 async function fuction3() {
     let inputList=inputListing,outputList=outputData,errorList=listError
     console.log(`начало`)
-    console.log(inputList)
+    //console.log(inputList)
     console.log(outputList)
     console.log(errorList)
 
@@ -260,7 +260,7 @@ async function fuction3() {
     //необработанные данные
     
     let inputListingF3=inputList
-    const pos = inputList.length+outputList.length;
+    const pos = errorList.length+outputList.length;
     const lastLength = inputList.length-pos;
     console.log(lastLength)
     const lastOutput=[];
@@ -290,7 +290,7 @@ async function fuction3() {
     // удаляем ссылку на файл
     URL.revokeObjectURL(fileLast)
     console.log(`конец`)
-    console.log(inputList)
+    //console.log(inputList)
     console.log(outputList)
     console.log(errorList)
 
