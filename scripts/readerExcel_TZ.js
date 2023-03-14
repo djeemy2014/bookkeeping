@@ -1,10 +1,10 @@
 import XLSX from 'xlsx';
 
-const input_xlsx = "C:\\Users\\ddemidyuk\\Downloads\\выгрузка гнп и тз на 28.02.xlsx";
-const output_xlsx = "C:\\Users\\ddemidyuk\\Downloads\\ALL.xlsx"; //Чернушенский Соликамский
-const selectColon = 'Реестровый номер';
-const kodTZColon = 'Наименование';
-const selectNumKK=/59:25.|59:40.|59:10.|59:34./;
+const input_xlsx = "C:\\Users\\ddemidyuk\\Downloads\\гнп и тз на 13.03.2023 (2).xlsx";
+const output_xlsx = "C:\\Users\\ddemidyuk\\Downloads\\ALL20230313.xlsx"; //Чернушенский Соликамский ALL20230313
+const selectColon = 'Номер';
+const kodTZColon = 'Название';
+const selectNumKK=/59:40.|59:25.|59:10.|59:34./;
 const regexpKodTZ=/\(\S{0,6}( \(\S{0,3}\)){0,1}\)/;
 //const regexpNP=/(,\s)\S{0,50}(.\s){0,1}\S{0,50}(\s){0,1}\S{0,50}(,\s)\S{0,50}( городской округ)/
 const regexpNP=/(,\s)\S{0,50}(\.)\s{0,1}\S{0,50}(\s){0,1}\S{0,50}(,\s)|\S{0,50}( городской округ)/;
@@ -38,18 +38,20 @@ console.log(inputDatd[0])
 
 //Лист территориальных зон
 const listTZ = XLSX.utils.sheet_to_json(
-    file.Sheets[file.SheetNames[1]]);
+    file.Sheets[file.SheetNames[0]]);
 
 //console.log(listTZ)
 
 //выборка по условию
 listTZ.forEach((res) => {
+    //
     if (selectNumKK.test(res[selectColon])){
+        //console.log(res)
         inputDatd.push(res);
     };
 
 });
-
+console.log(inputDatd)
 inputDatd.forEach((res) => {
     //console.log(res[kodTZColon]);
     //console.log(regexpKodTZ.exec(res[kodTZColon])[0].replace(/\(|\)/g,''))
