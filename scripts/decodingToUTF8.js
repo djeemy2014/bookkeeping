@@ -10,7 +10,7 @@ import fs from 'fs'
 } */
 
 export default class Cp1251ToUtf8 {
-    constructor(input_path,output_path){
+    constructor(input_path,output_path=''){
         this.input_path=input_path;
         this.output_path=output_path;
         this.input = fs.readFileSync(this.input_path, 'binary');
