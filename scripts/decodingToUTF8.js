@@ -20,18 +20,20 @@ export default class Cp1251ToUtf8 {
 
     // нужна проверка на 8-ми битную кодировку
     // восможно стоит поменять на json файл соотвествия кодов в кодировках
-    decoding(){
-        const csv_arrey=this.input.split('');
+    decoding(buf=this.input){
+        
+        //const csv_arrey=this.input.split('');
         let endListSplit='';
-        for (let index in this.input){
-            if (this.input[index].charCodeAt(0)<128){
-                endListSplit+=String.fromCharCode(this.input[index].charCodeAt(0));
-            }else if ((this.input[index].charCodeAt(0)>=192)&&(this.input[index].charCodeAt(0)<256)){
-                endListSplit+=String.fromCharCode(this.input[index].charCodeAt(0)+848);
-            }else if ((this.input[index].charCodeAt(0)>=256)){
+        for (let index in buf){
+            if (buf[index].charCodeAt(0)<128){
+                endListSplit+=String.fromCharCode(buf[index].charCodeAt(0));
+            }else if ((buf[index].charCodeAt(0)>=192)&&(buf[index].charCodeAt(0)<256)){
+                //console.log(еncodingСheck(buf[index].charCodeAt(0)))
+                endListSplit+=String.fromCharCode(buf[index].charCodeAt(0)+848);
+            }else if ((buf[index].charCodeAt(0)>=256)){
                 throw 'не 8-ми битная кодировка'
             }else{
-                switch(this.input[index].charCodeAt(0)){
+                switch(buf[index].charCodeAt(0)){
             case 128:
                 endListSplit+=String.fromCharCode(1026)
                 break;
