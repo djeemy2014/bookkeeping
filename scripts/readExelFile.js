@@ -1,19 +1,21 @@
 import fs from 'fs'
 import path from 'path';
 import XLSX from 'xlsx';
+
+
 import cp1251 from './decodingToUTF8.js'
 
-//const url = "C:\\Users\\Администратор\\Downloads\\operations Wed Mar 01 09_16_50 MSK 2023-Mon Mar 06 19_46_21 MSK 2023.csv"
+const input_file = "C:\\Users\\Администратор\\Downloads\\operations Wed Mar 01 09_16_50 MSK 2023-Mon Mar 06 19_46_21 MSK 2023.csv"
 //входной файл
-const input_file = "./scripts/test_files/test_02.txt";
+//const input_file = "./scripts/test_files/test_02.txt";
 const inputFileType = path.extname(input_file)
-//чтение в бинарном виде
-const readInput = fs.readFileSync(input_file, 'binary')
+
+
 //const output_file = "C:\\Users\\Администратор\\Downloads\\ALL20230313.xlsx";
 //const output_csv="C:\\Users\\Администратор\\Downloads\\operations Wed Mar 01 09_16_50 MSK 2023-Mon Mar 06 19_46_21 MSK 2023_UTF8.csv";
 //const regexpUTF8=/[А-я]|Ё|ё/g
 //флаг перекодировки
-const flaguncoding = false
+const flaguncoding = true
 let file_utf=''
 let file =''
 
@@ -53,6 +55,8 @@ switch(inputFileType){
     case '.txt':
     case '.csv':
         // проверка на необходимость перекодировки
+        //чтение в бинарном виде
+        const readInput = fs.readFileSync(input_file, 'binary')
         switch(flaguncoding){
             case true: 
                 console.log('БЛииииин Нужна перекодировка')
