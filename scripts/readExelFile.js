@@ -4,8 +4,9 @@ import XLSX from 'xlsx';
 
 
 import cp1251 from './decodingToUTF8.js'
+import she256 from './she256String.js'
 
-const input_file = "C:\\Users\\Администратор\\Downloads\\operations Wed Mar 01 09_16_50 MSK 2023-Mon Mar 06 19_46_21 MSK 2023.csv"
+const input_file = "C:\\Users\\Администратор\\Downloads\\operations Wed Mar 01 09_16_50 MSK 2023-Wed Mar 29 19_13_41 MSK 2023.xls"
 //входной файл
 //const input_file = "./scripts/test_files/test_02.txt";
 const inputFileType = path.extname(input_file)
@@ -69,6 +70,7 @@ switch(inputFileType){
         }
         file = XLSX.read(file_utf,{type: "string"})
         break;
+    case '.xls':
     case '.xlsx':
         file = XLSX.readFile(input_file)
         //console.log(file)
@@ -79,5 +81,25 @@ switch(inputFileType){
 
 
 //возвращает перекодироный файл
-console.log(readFile(file))
+
+let readFileArr = readFile(file)
+//console.log(readFileArr)
+readFileArr.forEach(ev=>{
+    
+    JSON.stringify(ev)
+
+    ev['she256']=she256(JSON.stringify(ev))
+    //console.log(ev)
+})
+const readFileArr2=readFileArr
+readFileArr2.forEach(ev=>{
+    //console.log(ev.she256)
+    let result = readFileArr.filter(she => she.she256 == ev.she256);
+    if (result.length>1){
+        console.log(result)
+    }
+    //console.log(result)
+})
+//console.log(readFileArr)
+//console.time()
 //нужно проверять на кодировку и проверять на разделитель чисел.
