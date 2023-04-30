@@ -7,6 +7,7 @@ import cp1251 from './decodingToUTF8.js'
 import she256 from './she256String.js'
 
 const input_file = "C:\\Users\\Администратор\\Downloads\\operations Wed Mar 01 09_16_50 MSK 2023-Wed Mar 29 19_13_41 MSK 2023.xls"
+const dateRead=new Date()
 //входной файл
 //const input_file = "./scripts/test_files/test_02.txt";
 const inputFileType = path.extname(input_file)
@@ -50,6 +51,23 @@ function readFile(file){
     return (listing)
 }
 
+//проверка на повторение с предыдущими данными
+function testShe256(arreyInput, arreyJson){
+    let result=[]
+    arreyInput.forEach(ev =>{
+    //console.log(ev.she256)
+    let resultFilt = arreyJson.filter(she => she.she256 == ev.she256);
+    let i=0
+    if (resultFilt.length>1){
+        //console.log(resultFilt)
+        result[i]=resultFilt
+        i++
+    }
+    
+})
+//console.log( result)
+return result
+}
 
 //проверка на тип файла
 switch(inputFileType){
@@ -84,22 +102,27 @@ switch(inputFileType){
 
 let readFileArr = readFile(file)
 //console.log(readFileArr)
+//Работа с входными данными
 readFileArr.forEach(ev=>{
     
     JSON.stringify(ev)
-
+    ev['bank']='Тинькофф'
     ev['she256']=she256(JSON.stringify(ev))
+    //ev['index']=index
+    ev['input_file']=path.basename(input_file)
+    ev['dateRead']=dateRead
+    ev['deteOreation']=new Date(ev['Дата операции'])
+    ev['datePay']=new Date(ev['Дата платежа'])
+
     //console.log(ev)
 })
+//console.log(JSON.stringify(readFileArr,null, 2))
 const readFileArr2=readFileArr
-readFileArr2.forEach(ev=>{
-    //console.log(ev.she256)
-    let result = readFileArr.filter(she => she.she256 == ev.she256);
-    if (result.length>1){
-        console.log(result)
-    }
-    //console.log(result)
-})
+
+
+
+console.log( testShe256(readFileArr2, readFileArr))
+
 //console.log(readFileArr)
 //console.time()
 //нужно проверять на кодировку и проверять на разделитель чисел.

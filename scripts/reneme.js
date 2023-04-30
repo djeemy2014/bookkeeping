@@ -1,7 +1,7 @@
 import fs from 'fs'
 import XLSX from 'xlsx';
 
-const input_path = 'C:\\Users\\Администратор\\OneDrive\\Документы\\marcet\\ALL_40X30\\С ТОНОМ';
+const input_path = 'C:\\Users\\Администратор\\OneDrive\\Документы\\marcet\\ALL_43x25\\без тона';
 const regexXlsx= /(.xlsx)$/
 const regexJPG= /(.jpg)$/
 
